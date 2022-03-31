@@ -61,7 +61,7 @@ class ListTrends extends StatelessWidget {
                   child: Column(children: [
                     Expanded(
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10),
                       child: Image.asset(
                         anime.poster,
                         fit: BoxFit.cover,
@@ -108,33 +108,31 @@ class Header extends StatelessWidget {
             minHeight: 60,
             maxHeight: 60,
             child: Container(
-              color: AnimeUI.background,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
+                color: AnimeUI.background,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Expanded(
-                          child: Text(
-                        'My Anime Stream',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            ?.copyWith(color: AnimeUI.background),
-                      )),
-                      const Icon(Icons.search, color: Colors.white, size: 30)
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    "What you would like to watch today ?",
-                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                          color: Colors.white,
-                        ),
-                  )
-                ],
-              ),
-            )));
+                      Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                            'My Anime Stream',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                ?.copyWith(color: AnimeUI.background),
+                          )),
+                          const Icon(Icons.search,
+                              color: Colors.white, size: 30)
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      Text("What you would like to watch today ?",
+                          style:
+                              Theme.of(context).textTheme.subtitle1?.copyWith(
+                                    color: Colors.white
+                                  ))
+                    ]))));
   }
 }
