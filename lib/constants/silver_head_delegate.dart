@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 class SilverCustomHeaderDelegate extends SliverPersistentHeaderDelegate {
@@ -29,5 +27,5 @@ class SilverCustomHeaderDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(SilverCustomHeaderDelegate oldDelegate) =>
       this != oldDelegate;
 
-  
+
 }
