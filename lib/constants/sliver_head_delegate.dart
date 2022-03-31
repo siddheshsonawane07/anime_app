@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SilverCustomHeaderDelegate extends SliverPersistentHeaderDelegate {
-  SilverCustomHeaderDelegate({
+class SliverCustomHeaderDelegate extends SliverPersistentHeaderDelegate {
+ SliverCustomHeaderDelegate({
     required this.minHeight,
     required this.maxHeight,
     required this.child,
@@ -24,8 +24,7 @@ class SilverCustomHeaderDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => minHeight;
 
   @override
-  bool shouldRebuild(SilverCustomHeaderDelegate oldDelegate) =>
-      this != oldDelegate;
-
-
+  bool shouldRebuild(SliverCustomHeaderDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight || minHeight != oldDelegate.minHeight || child != oldDelegate.child;
+  }
 }
