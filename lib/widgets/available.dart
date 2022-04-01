@@ -1,5 +1,6 @@
 import 'package:anime_app/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Available extends StatelessWidget {
   const Available({
@@ -37,10 +38,14 @@ class Available extends StatelessWidget {
                       width: size.width,
                     ),
                   ),
-                  // Align(
-                  //   alignment: Alignment.center,
-                  //   child: SvgPicture.asset('assets/icons/play.svg'),
-                  // ),
+                  Center(
+                    child: Image.asset(
+                      'assets/icons/play.png',
+                      color: AnimeUI.cyan,
+                      height: size.height * 0.10,
+                      width: size.width * 0.10,
+                    ),
+                  ),
                 ],
               ),
             )

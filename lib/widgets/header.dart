@@ -8,6 +8,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
+      floating: true,
       delegate: SliverCustomHeaderDelegate(
         minHeight: 60,
         maxHeight: 60,

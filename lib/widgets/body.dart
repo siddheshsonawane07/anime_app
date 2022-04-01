@@ -11,7 +11,16 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
-        slivers: [Header(), Trends(), Recents(), Available()]);
+    return const CustomScrollView(slivers: [
+      Header(),
+      Trends(),
+      Recents(),
+      Available(),
+      SliverToBoxAdapter(
+        child: SizedBox(
+          height: kBottomNavigationBarHeight * 1.4,
+        ),
+      )
+    ]);
   }
 }
