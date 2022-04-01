@@ -28,10 +28,14 @@ class Available extends StatelessWidget {
               aspectRatio: 16 / 9,
               child: Stack(
                 children: [
-                  Image.asset(
-                    'assets/images/demon.jpg',
-                    fit: BoxFit.cover,
-                    height: size.height,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      'assets/images/demon.jpg',
+                      fit: BoxFit.cover,
+                      height: size.height * 0.5,
+                      width: size.width,
+                    ),
                   ),
                   // Align(
                   //   alignment: Alignment.center,
