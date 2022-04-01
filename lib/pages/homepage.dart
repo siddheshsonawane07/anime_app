@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: Stack(
-          children: [Body(), NavBar()],
+          children: const [Body()],
         ),
       ),
     );
@@ -36,7 +36,7 @@ class NavBar extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        height: kBottomNavigationBarHeight * 1.4,
+        height: kBottomNavigationBarHeight * 0.0001,
         decoration: BoxDecoration(
           color: AnimeUI.background,
           boxShadow: [
@@ -49,13 +49,25 @@ class NavBar extends StatelessWidget {
         ),
         padding: edgeInsets,
         child: Row(
-            children: List.generate(
-                itemsNavBar.length,
-                (index) => Expanded(
-                      child: Column(children: [
-                        SvgPicture.asset(itemsNavBar[index].path)
-                      ]),
-                    ))),
+          children: List.generate(
+            itemsNavBar.length,
+            (index) => Expanded(
+              child: Column(
+                children: [
+                  SvgPicture.asset(itemsNavBar[index].path),
+                  const SizedBox(height: 5),
+                  Text(
+                    itemsNavBar[index].name,
+                    style: Theme.of(context)
+                        .textTheme
+                        .button
+                        ?.copyWith(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -99,11 +111,9 @@ class Available extends StatelessWidget {
               aspectRatio: 16 / 9,
               child: Stack(
                 children: [
-                  Positioned.fill(
-                    child: Image.asset(
-                      'assets/images/demon.jpg',
-                      fit: BoxFit.cover,
-                    ),
+                  Image.asset(
+                    'assets/images/demon.jpg',
+                    fit: BoxFit.cover,
                   ),
                   // Align(
                   //   alignment: Alignment.center,
