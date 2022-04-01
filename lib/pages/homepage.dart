@@ -14,11 +14,70 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
-        child: CustomScrollView(slivers: const [Header(), Trends()]),
+        child: CustomScrollView(slivers: [Header(), Trends(), Recents()]),
       ),
     );
+  }
+}
+
+class Recents extends StatelessWidget {
+  const Recents({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+        child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: AspectRatio(
+                aspectRatio: 16 / 6,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Text("Recently added",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  ?.copyWith(
+                                      color: AnimeUI.cyan,
+                                      fontWeight: FontWeight.bold))),
+                      const ListRecents()
+                    ]))));
+  }
+}
+
+class ListRecents extends StatelessWidget {
+  const ListRecents({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(child: LayoutBuilder(builder: (context, constraints) {
+      return ListView.builder(
+          itemCount: recentsData.length,
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.only(left: 20, top: 10),
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: SizedBox(
+                height: constraints.maxHeight,
+                width: constraints.maxWidth * .25,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child:
+                      Image.asset(recentsData[index].poster, fit: BoxFit.cover),
+                ),
+              ),
+            );
+          });
+    }));
   }
 }
 
@@ -31,7 +90,7 @@ class Trends extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 10),
         child: AspectRatio(
-          aspectRatio: 16 / 13,
+          aspectRatio: 16 / 12,
           child: Column(children: const [HeaderTrends(), ListTrends()]),
         ),
       ),
@@ -54,6 +113,10 @@ class ListTrends extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10, left: 20),
             itemBuilder: (_, index) {
               final anime = trendsData[index];
+              final style = Theme.of(context)
+                  .textTheme
+                  .button
+                  ?.copyWith(color: Colors.white, fontWeight: FontWeight.w600);
               return Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: SizedBox(
@@ -77,11 +140,17 @@ class ListTrends extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // SvgPicture.asset('assets/icons/home.svg'),
+                        const SizedBox(width: 5),
                         Text(
-                          'Score: ${anime.score}',
+                          'Rating: ${anime.score}',
                           style: Theme.of(context).textTheme.button?.copyWith(
                               color: Colors.white, fontWeight: FontWeight.w600),
-                        )
+                        ),
+                        const SizedBox(width: 7.5),
+                        Text(
+                          '# ${anime.number}',
+                          style: style?.copyWith(color: AnimeUI.cyan),
+                        ),
                       ],
                     )
                   ]),
@@ -138,7 +207,7 @@ class Header extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6
-                                ?.copyWith(color: AnimeUI.background),
+                                ?.copyWith(color: AnimeUI.cyan),
                           )),
                           const Icon(Icons.search,
                               color: Colors.white, size: 30)
