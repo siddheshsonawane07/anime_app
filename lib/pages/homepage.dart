@@ -44,6 +44,7 @@ class Available extends StatelessWidget {
                     color: AnimeUI.cyan, fontWeight: FontWeight.bold),
               ),
             ),
+            const SizedBox(height: 5),
             AspectRatio(
               aspectRatio: 16 / 9,
               child: Stack(
@@ -53,7 +54,11 @@ class Available extends StatelessWidget {
                       'assets/images/demon.jpg',
                       fit: BoxFit.cover,
                     ),
-                  )
+                  ),
+                  // Align(
+                  //   alignment: Alignment.center,
+                  //   child: SvgPicture.asset('assets/icons/play.svg'),
+                  // ),
                 ],
               ),
             )
@@ -73,7 +78,7 @@ class Recents extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.only(top: 10),
         child: AspectRatio(
           aspectRatio: 16 / 6,
           child: Column(
@@ -84,7 +89,7 @@ class Recents extends StatelessWidget {
                   child: Text("Recently added",
                       style: Theme.of(context).textTheme.headline6?.copyWith(
                           color: AnimeUI.cyan, fontWeight: FontWeight.bold))),
-              const ListRecents()
+              const RecentsList()
             ],
           ),
         ),
@@ -93,8 +98,8 @@ class Recents extends StatelessWidget {
   }
 }
 
-class ListRecents extends StatelessWidget {
-  const ListRecents({
+class RecentsList extends StatelessWidget {
+  const RecentsList({
     Key? key,
   }) : super(key: key);
 
@@ -104,23 +109,24 @@ class ListRecents extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           return ListView.builder(
-              itemCount: recentsData.length,
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.only(left: 20, top: 10),
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: SizedBox(
-                    height: constraints.maxHeight,
-                    width: constraints.maxWidth * .25,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(recentsData[index].poster,
-                          fit: BoxFit.cover),
-                    ),
+            itemCount: recentsData.length,
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.only(left: 20, top: 5),
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: SizedBox(
+                  height: constraints.maxHeight,
+                  width: constraints.maxWidth * .25,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(recentsData[index].poster,
+                        fit: BoxFit.cover),
                   ),
-                );
-              });
+                ),
+              );
+            },
+          );
         },
       ),
     );
@@ -265,11 +271,13 @@ class Header extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 5),
-              Text("What you would like to watch today ?",
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1
-                      ?.copyWith(color: Colors.white))
+              Text(
+                "What you would like to watch today ?",
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1
+                    ?.copyWith(color: Colors.white),
+              ),
             ],
           ),
         ),
