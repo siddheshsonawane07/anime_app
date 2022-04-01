@@ -16,26 +16,50 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(slivers: [
-          Header(),
-          Trends(),
-          Recents(),
-          Aviable()
-        ]),
+        child: CustomScrollView(
+            slivers: [Header(), Trends(), Recents(), Available()]),
       ),
     );
   }
 }
 
-class Aviable extends StatelessWidget {
-  const Aviable({
+class Available extends StatelessWidget {
+  const Available({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Padding(padding: EdgeInsets.only(top: 15)),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                "Available: Demon Slayer",
+                style: Theme.of(context).textTheme.headline6?.copyWith(
+                    color: AnimeUI.cyan, fontWeight: FontWeight.bold),
+              ),
+            ),
+            AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Image.asset(
+                      'assets/images/demon.jpg',
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
@@ -48,24 +72,24 @@ class Recents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-        child: Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: AspectRatio(
-                aspectRatio: 16 / 6,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Text("Recently added",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline6
-                                  ?.copyWith(
-                                      color: AnimeUI.cyan,
-                                      fontWeight: FontWeight.bold))),
-                      const ListRecents()
-                    ]))));
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: AspectRatio(
+          aspectRatio: 16 / 6,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text("Recently added",
+                      style: Theme.of(context).textTheme.headline6?.copyWith(
+                          color: AnimeUI.cyan, fontWeight: FontWeight.bold))),
+              const ListRecents()
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -76,26 +100,30 @@ class ListRecents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: LayoutBuilder(builder: (context, constraints) {
-      return ListView.builder(
-          itemCount: recentsData.length,
-          scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.only(left: 20, top: 10),
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: SizedBox(
-                height: constraints.maxHeight,
-                width: constraints.maxWidth * .25,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child:
-                      Image.asset(recentsData[index].poster, fit: BoxFit.cover),
-                ),
-              ),
-            );
-          });
-    }));
+    return Expanded(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return ListView.builder(
+              itemCount: recentsData.length,
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(left: 20, top: 10),
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: SizedBox(
+                    height: constraints.maxHeight,
+                    width: constraints.maxWidth * .25,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(recentsData[index].poster,
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                );
+              });
+        },
+      ),
+    );
   }
 }
 
@@ -142,13 +170,14 @@ class ListTrends extends StatelessWidget {
                   width: constraints.maxWidth * .375,
                   child: Column(children: [
                     Expanded(
-                        child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        anime.poster,
-                        fit: BoxFit.cover,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(
+                          anime.poster,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    )),
+                    ),
                     const SizedBox(height: 15),
                     Text(anime.name,
                         style: Theme.of(context).textTheme.subtitle1?.copyWith(
@@ -187,17 +216,21 @@ class HeaderTrends extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(children: [
-        Expanded(
-            child: Text("Trends",
-                style: Theme.of(context).textTheme.headline6?.copyWith(
-                    color: AnimeUI.cyan, fontWeight: FontWeight.bold))),
-        Text("View all",
+      child: Row(
+        children: [
+          Expanded(
+              child: Text("Trends",
+                  style: Theme.of(context).textTheme.headline6?.copyWith(
+                      color: AnimeUI.cyan, fontWeight: FontWeight.bold))),
+          Text(
+            "View all",
             style: Theme.of(context)
                 .textTheme
                 .subtitle2
-                ?.copyWith(color: AnimeUI.cyan, fontWeight: FontWeight.bold))
-      ]),
+                ?.copyWith(color: AnimeUI.cyan, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -208,35 +241,39 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
-        delegate: SliverCustomHeaderDelegate(
-            minHeight: 60,
-            maxHeight: 60,
-            child: Container(
-                color: AnimeUI.background,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                              child: Text(
-                            'My Anime Stream',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                ?.copyWith(color: AnimeUI.cyan),
-                          )),
-                          const Icon(Icons.search,
-                              color: Colors.white, size: 30)
-                        ],
-                      ),
-                      const SizedBox(height: 5),
-                      Text("What you would like to watch today ?",
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1
-                              ?.copyWith(color: Colors.white))
-                    ]))));
+      delegate: SliverCustomHeaderDelegate(
+        minHeight: 60,
+        maxHeight: 60,
+        child: Container(
+          color: AnimeUI.background,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'My Anime Stream',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          ?.copyWith(color: AnimeUI.cyan),
+                    ),
+                  ),
+                  const Icon(Icons.search, color: Colors.white, size: 30)
+                ],
+              ),
+              const SizedBox(height: 5),
+              Text("What you would like to watch today ?",
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1
+                      ?.copyWith(color: Colors.white))
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
