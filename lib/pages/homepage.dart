@@ -1,6 +1,7 @@
 import 'package:anime_app/constants/colors.dart';
 import 'package:anime_app/constants/sliver_head_delegate.dart';
 import 'package:anime_app/models/anime.dart';
+import 'package:anime_app/models/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -17,10 +18,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: Stack(
-          children: const [
-            Body(),
-            NavBar()
-          ],
+          children: [Body(), NavBar()],
         ),
       ),
     );
@@ -28,14 +26,37 @@ class _HomePageState extends State<HomePage> {
 }
 
 class NavBar extends StatelessWidget {
-  const NavBar({
+  NavBar({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var edgeInsets = const EdgeInsets.symmetric(horizontal: 10);
     return Align(
       alignment: Alignment.bottomCenter,
+      child: Container(
+        height: kBottomNavigationBarHeight * 1.4,
+        decoration: BoxDecoration(
+          color: AnimeUI.background,
+          boxShadow: [
+            BoxShadow(
+              spreadRadius: 7.5,
+              blurRadius: 15,
+              color: AnimeUI.cyan.withOpacity(.45),
+            ),
+          ],
+        ),
+        padding: edgeInsets,
+        child: Row(
+            children: List.generate(
+                itemsNavBar.length,
+                (index) => Expanded(
+                      child: Column(children: [
+                        SvgPicture.asset(itemsNavBar[index].path)
+                      ]),
+                    ))),
+      ),
     );
   }
 }
