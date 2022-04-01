@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: Stack(
-          children: [Body(), BottomNavBar()],
+          children: [const Body(), BottomNavBar()],
         ),
       ),
     );
