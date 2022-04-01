@@ -14,10 +14,28 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(slivers: [Header(), Trends(), Recents()]),
+        child: CustomScrollView(slivers: [
+          Header(),
+          Trends(),
+          Recents(),
+          Aviable()
+        ]),
       ),
+    );
+  }
+}
+
+class Aviable extends StatelessWidget {
+  const Aviable({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Padding(padding: EdgeInsets.only(top: 15)),
     );
   }
 }
