@@ -34,24 +34,34 @@ class BottomNavBar extends StatelessWidget {
               child: ValueListenableBuilder<int>(
                   valueListenable: _index,
                   builder: (_, value, __) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          itemsNavBar[index].path,
-                          width: 20,
-                          height: 20,
-                          color: AnimeUI.cyan,
+                    return GestureDetector(
+                      onTap: () => _index.value = index,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              itemsNavBar[index].path,
+                              width: 20,
+                              height: 20,
+                              color: (index == value)
+                                  ? AnimeUI.cyan
+                                  : Colors.white,
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              itemsNavBar[index].name,
+                              style:
+                                  Theme.of(context).textTheme.button?.copyWith(
+                                        color: (index == value)
+                                            ? AnimeUI.cyan
+                                            : Colors.white,
+                                      ),
+                            ),
+                          ],
                         ),
-                        // const SizedBox(height: 5),
-                        // Text(
-                        //   itemsNavBar[index].name,
-                        //   style: Theme.of(context)
-                        //       .textTheme
-                        //       .button
-                        //       ?.copyWith(color: Colors.white),
-                        // ),
-                      ],
+                      ),
                     );
                   }),
             ),
