@@ -16,10 +16,39 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(
-            slivers: [Header(), Trends(), Recents(), Available()]),
+        child: Stack(
+          children: const [
+            Body(),
+            NavBar()
+          ],
+        ),
       ),
     );
+  }
+}
+
+class NavBar extends StatelessWidget {
+  const NavBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+    );
+  }
+}
+
+class Body extends StatelessWidget {
+  const Body({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const CustomScrollView(
+        slivers: [Header(), Trends(), Recents(), Available()]);
   }
 }
 
