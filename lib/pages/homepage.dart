@@ -2,6 +2,7 @@ import 'package:anime_app/constants/colors.dart';
 import 'package:anime_app/constants/sliver_head_delegate.dart';
 import 'package:anime_app/models/anime.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -66,7 +67,23 @@ class ListTrends extends StatelessWidget {
                         anime.poster,
                         fit: BoxFit.cover,
                       ),
-                    ))
+                    )),
+                    const SizedBox(height: 15),
+                    Text(anime.name,
+                        style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 7.5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // SvgPicture.asset('assets/icons/home.svg'),
+                        Text(
+                          'Score: ${anime.score}',
+                          style: Theme.of(context).textTheme.button?.copyWith(
+                              color: Colors.white, fontWeight: FontWeight.w600),
+                        )
+                      ],
+                    )
                   ]),
                 ),
               );
@@ -129,10 +146,10 @@ class Header extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       Text("What you would like to watch today ?",
-                          style:
-                              Theme.of(context).textTheme.subtitle1?.copyWith(
-                                    color: Colors.white
-                                  ))
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1
+                              ?.copyWith(color: Colors.white))
                     ]))));
   }
 }
