@@ -8,9 +8,10 @@ class Available extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.only(top: 15),
+        padding: const EdgeInsets.only(top: 15, bottom: 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -30,6 +31,7 @@ class Available extends StatelessWidget {
                   Image.asset(
                     'assets/images/demon.jpg',
                     fit: BoxFit.cover,
+                    height: size.height,
                   ),
                   // Align(
                   //   alignment: Alignment.center,

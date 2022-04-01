@@ -1,4 +1,5 @@
 import 'package:anime_app/widgets/body.dart';
+import 'package:anime_app/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,7 +15,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: Stack(
-          children: const [Body()],
+          children: [Body(), BottomNavBar()],
         ),
       ),
     );
